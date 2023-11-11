@@ -1,26 +1,74 @@
-require('dotenv').config();
-console.log(process.env); // remove
+import logger from './modules/logger.js';
 
-const logger = require('./modules/logger.js');
+import pg from './database/database.js';
 
-console.log('Hello World!');
+async function insertData() {
+    try {
+        await pg('todos').insert({ state: 'INCOMPLETE', description: 'test value' });
+        logger.info('data inserted successfully');
+    } catch (error) {
+        logger.error('error inserting data >', error);
+    } finally {
+        pg.destroy();
+    }
+}
 
-/**
- * A function that logs a greeting message.
- *
- * @param {string} name - The name to greet. Default is 'you'.
- * @return {undefined} The function does not return a value.
- */
-const hello = (name) => {
-    name = 'You' || name;
-    console.log('Hello ' + name + '!');
-};
+//insertData();
 
-hello('To');
+async function listRows() {
+    try {
+        const rows = await pg('todos').select('*');
+        logger.info('rows >', rows);
+    } catch (error) {
+        logger.error('error listing rows >', error);
+    } finally {
+        pg.destroy();
+    }
+}
 
-var srt1 = 'test 1';
-let srt2 = 'test 2';
+listRows();
 
-logger.info('test');
-logger.error('test');
-logger.warning('test');
+async function deleteRowById(id) {
+    try {
+        await pg('todos').where('id', id).del();
+        logger.log('row deleted successfully');
+    } catch (error) {
+        logger.error('error deleting row >', error);
+    } finally {
+        pg.destroy();
+    }
+}
+
+//deleteRowById(1);
+
+async function editRowById(id, newData) {
+    try {
+        await pg('todos').where('id', id).update(newData);
+        logger.log('row updated successfully');
+    } catch (error) {
+        logger.error('Error updating row >', error);
+    } finally {
+        pg.destroy();
+    }
+}
+
+//const id = 2;
+//const newData = { state: 'INCOMPLETE', description: 'edited value' };
+
+//editRowById(id, newData);
+
+async function updateTimestamp(id, newData) {
+    try {
+        await pg('todos').where('id', id).update(newData);
+        logger.log('row updated successfully');
+    } catch (error) {
+        logger.error('error updating timestamp >', error);
+    } finally {
+        pg.destroy();
+    }
+}
+
+//const id = 2;
+//const newData = { state: 'COMPLETE', completed_at: pg.fn.now() };
+
+//updateTimestamp(id, newData);
