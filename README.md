@@ -1,6 +1,6 @@
 # Todo-List
 
-Node.js, Hapy.js, Next.js, PostgreSQL
+Node.js, Hapi.js, Next.js, PostgreSQL
 
 > remote git [repo](https://github.com/compiled-beetle/Todo-List)
 
