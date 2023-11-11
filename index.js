@@ -1,6 +1,8 @@
 require('dotenv').config();
 console.log(process.env); // remove
 
+const logger = require('./modules/logger.js');
+
 console.log('Hello World!');
 
 /**
@@ -18,3 +20,7 @@ hello('To');
 
 var srt1 = 'test 1';
 let srt2 = 'test 2';
+
+logger.info('test');
+logger.error('test');
+logger.warning('test');
