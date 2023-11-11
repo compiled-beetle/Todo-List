@@ -1,28 +1,38 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 const env = process.env.ENVIRONMENT;
 
 /**
- * Logger prints to console.
+ * Logs an information to the console.
  *
- * @options .info .error .warning
- * @param {string} message - String to be printed.
+ * @optios {.info, .error, .warning}
+ * @param {string} message - The message to be logged.
+ * @param {...*} params - Additional parameters to be logged.
  *
- * Logger cannot recive variables.
+ * Returns nothing.
  */
-const logger = {
-    info: (message) => {
-
-        env === 'dev' ? console.log(`INFO >> ${message}`) : null;
+export const logger = {
+    info: (message, ...params) => {
+        const formattedParams = params.map((param) =>
+            typeof param === 'object' ? JSON.stringify(param, null, 2) : param
+        );
+        env === 'dev' ? console.log(`INFO >> ${message}`, ...formattedParams) : null;
     },
 
-    error: (message) => {
-
-        env === 'dev' ? console.error(`ERROR >> ${message}`) : null;
+    error: (message, ...params) => {
+        const formattedParams = params.map((param) =>
+            typeof param === 'object' ? JSON.stringify(param, null, 2) : param
+        );
+        env === 'dev' ? console.error(`ERROR >> ${message}`, ...formattedParams) : null;
     },
 
-    warning: (message) => {
-
-        env === 'dev' ? console.warn(`WARNING >> ${message}`) : null;
-    }
+    warning: (message, ...params) => {
+        const formattedParams = params.map((param) =>
+            typeof param === 'object' ? JSON.stringify(param, null, 2) : param
+        );
+        env === 'dev' ? console.warn(`WARNING >> ${message}`, ...formattedParams) : null;
+    },
 };
 
-module.exports = logger;
+export default logger;

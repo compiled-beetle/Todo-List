@@ -40,5 +40,6 @@
             "**/_dev_docs/**"
         ],
         "delay": 1000
-    }
+    },
+    "type": "module"
 }
