@@ -1,25 +1,44 @@
 {
-  "name": "todo-list",
-  "version": "1.0.0",
-  "description": "elecctro challenge",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/compiled-beetle/Todo-List.git"
-  },
-  "keywords": [
-    "node",
-    "hapi",
-    "next",
-    "postgres"
-  ],
-  "author": "antonio costa",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/compiled-beetle/Todo-List/issues"
-  },
-  "homepage": "https://github.com/compiled-beetle/Todo-List#readme"
+    "name": "todo-list",
+    "version": "1.0.0",
+    "description": "elecctro challenge",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "dev": "nodemon index.js"
+      },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/compiled-beetle/Todo-List.git"
+    },
+    "keywords": [
+        "node",
+        "hapi",
+        "next",
+        "postgres"
+    ],
+    "author": "antonio costa",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/compiled-beetle/Todo-List/issues"
+    },
+    "homepage": "https://github.com/compiled-beetle/Todo-List#readme",
+    "dependencies": {
+        "@hapi/hapi": "^21.3.2",
+        "dotenv": "^16.3.1",
+        "joi": "^17.11.0",
+        "knex": "^3.0.1",
+        "pg": "^8.11.3"
+    },
+    "devDependencies": {
+        "@hapi/eslint-plugin": "^6.0.0",
+        "eslint": "^8.53.0",
+        "nodemon": "^3.0.1"
+    },
+    "nodemonConfig": {
+        "ignore": [
+            "**/_dev_docs/**"
+        ],
+        "delay": 1000
+    }
 }

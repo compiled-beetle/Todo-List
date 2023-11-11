@@ -1,0 +1,22 @@
+{
+    "env": {
+        "es6": true,
+        "node": true
+    },
+    "globals": {
+        "Promise": "off"
+    },
+    "extends": "plugin:@hapi/recommended",
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module"
+    },
+    "ignorePatterns": ["**/node_modules/*.js", "**/_dev_docs/*"],
+    "rules": {
+        // "no-var": "error",
+        "quotes": ["warn", "single"],
+        "semi": ["error", "always"],
+        "indent": ["error", 4],
+        "no-multi-spaces": ["error"]
+    }
+}

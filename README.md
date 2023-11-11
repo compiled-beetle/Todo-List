@@ -13,6 +13,7 @@ Node.js, Hapi.js, Next.js, PostgreSQL
 -   server -> node.js
 -   database -> postgreSQL
 -   packages:
+    -   dotenv
     -   [hapi](https://hapi.dev/)
     -   [knext](http://knexjs.org/)
 -   dev packages:
