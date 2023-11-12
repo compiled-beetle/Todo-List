@@ -20,11 +20,6 @@ startServer();
 
 //const rs = await deleteDataById(12);
 
-//const id = 15;
-//const data = { state: 'INCOMPLETE', description: 'edited value' };
-
-//editDataById(id, data);
-
 //const id = 11;
 
 //updateDataTimestampById(id);

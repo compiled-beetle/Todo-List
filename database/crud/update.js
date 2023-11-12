@@ -7,7 +7,7 @@ import pg from '../../database/database.js';
  *
  * @param {number} id - The id of the data to edit.
  * @param {object} data - The updated data to save.
- * @return {Promise<boolean>} Returns true if the data was edited successfully, otherwise false.
+ * @return {Promise<any>} Returns true if the data was edited successfully, otherwise false.
  */
 export const editDataById = async (id, data) => {
     data.state === 'COMPLETE' ? (data = { ...data, completed_at: pg.fn.now() }) : void 0;
@@ -20,10 +20,12 @@ export const editDataById = async (id, data) => {
             return false;
         } else if (result[0].state === 'COMPLETE') {
             logger.info('row cannot be updated');
-            return false;
+            return 'completed';
         } else {
-            await pg('todos').where('id', id).update(data);
+            const result = await pg('todos').where('id', id).update(data).returning('*');
             logger.info('row updated successfully');
+
+            return result;
         }
     } catch (error) {
         logger.error('error updating row >', error);
@@ -31,7 +33,6 @@ export const editDataById = async (id, data) => {
     } finally {
         pg.destroy();
     }
-    return true;
 };
 
 /**
