@@ -3,7 +3,6 @@ import {
     insertData,
     listAllData,
     editDataById,
-    updateDataTimestampById,
     deleteDataById,
 } from './database/crud/_index.js';
 
