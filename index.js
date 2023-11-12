@@ -12,7 +12,7 @@ import {
 
 //listAllData();
 
-//deleteDataById(2);
+//const rs = await deleteDataById(12);
 
 //const id = 2;
 //const data = { state: 'INCOMPLETE', description: 'edited value' };
