@@ -18,9 +18,6 @@ const startServer = async () => {
 
 startServer();
 
-//const data = { description: 'test value' };
-//const rs = await insertData(data);
-
 //const rs = await listAllData();
 
 //const rs = await deleteDataById(12);
