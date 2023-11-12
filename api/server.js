@@ -1,6 +1,6 @@
 import hapi from '@hapi/hapi';
 
-import { getOneRequest, getAllRequest, postRequest, patchRequest, deleteRequest } from './handlers/_index.js';
+import { getAllRequest, postRequest, patchRequest, deleteRequest } from './handlers/_index.js';
 
 /**
  * Creates and configures an Hapi API server.
@@ -11,12 +11,6 @@ export const apiServer = async () => {
     const server = hapi.server({
         port: 3000,
         host: 'localhost',
-    });
-
-    server.route({
-        method: 'GET',
-        path: '/api/todo/{id}',
-        handler: getOneRequest,
     });
 
     server.route({
