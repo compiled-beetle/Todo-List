@@ -7,8 +7,8 @@ import {
     deleteDataById,
 } from './database/crud/_index.js';
 
-//const data = { state: 'INCOMPLETE', description: 'test value' };
-//insertData(data);
+//const data = { description: 'test value' };
+//const rs = await insertData(data);
 
 //const rs = await listAllData();
 

@@ -6,14 +6,18 @@ import pg from '../../database/database.js';
  * Inserts data into the 'todos' table.
  *
  * @param {Object} data - The data to be inserted.
- * @return {Promise<void>} A promise that resolves when the data is insertet.
+ * @return {Promise<any>} The inserted data or false if an error occurred.
  */
 export const insertData = async (data) => {
+    data = { ...data, state: 'INCOMPLETE' };
+
     try {
-        await pg('todos').insert(data);
+        const result = await pg('todos').insert(data).returning('*');
         logger.info('data inserted successfully');
+        return result;
     } catch (error) {
         logger.error('error inserting data >', error);
+        return false;
     } finally {
         pg.destroy();
     }
