@@ -18,8 +18,6 @@ const startServer = async () => {
 
 startServer();
 
-//const rs = await listAllData();
-
 //const rs = await deleteDataById(12);
 
 //const id = 15;
