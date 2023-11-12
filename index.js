@@ -10,7 +10,7 @@ import {
 //const data = { state: 'INCOMPLETE', description: 'test value' };
 //insertData(data);
 
-//listAllData();
+//const rs = await listAllData();
 
 //const rs = await deleteDataById(12);
 
