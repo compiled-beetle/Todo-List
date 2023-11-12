@@ -1,7 +1,9 @@
 import hapi from '@hapi/hapi';
 
+import { getOneRequest, getAllRequest, postRequest, patchRequest, deleteRequest } from './handlers/_index.js';
+
 /**
- * Creates and configures an using Hapi API server.
+ * Creates and configures an Hapi API server.
  *
  * @return {Promise<any>} Hapi server instance.
  */
@@ -13,45 +15,32 @@ export const apiServer = async () => {
 
     server.route({
         method: 'GET',
-        path: '/api/todos',
-        handler: (request, http) => {
-            return 'GET request';
-        },
+        path: '/api/todo/{id}',
+        handler: getOneRequest,
     });
 
     server.route({
         method: 'GET',
-        path: '/api/todo/{id}',
-        handler: (request, http) => {
-            const id = request.params.id;
-            return 'GET request > id ${id}';
-        },
+        path: '/api/todos',
+        handler: getAllRequest,
     });
 
     server.route({
         method: 'POST',
         path: '/api/todo',
-        handler: (request, http) => {
-            return 'POST request';
-        },
+        handler: postRequest,
     });
 
     server.route({
         method: 'PATCH',
         path: '/api/todo/{id}',
-        handler: (request, http) => {
-            const id = request.params.id;
-            return `PATCH request > id ${id}`;
-        },
+        handler: patchRequest,
     });
 
     server.route({
         method: 'DELETE',
         path: '/api/todo/{id}',
-        handler: (request, http) => {
-            const id = request.params.id;
-            return `DELETE request > id ${id}`;
-        },
+        handler: deleteRequest,
     });
 
     return server;
