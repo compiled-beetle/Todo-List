@@ -17,21 +17,21 @@ export const logger = {
         const formattedParams = params.map((param) =>
             typeof param === 'object' ? JSON.stringify(param, null, 2) : param
         );
-        env === 'dev' ? console.log(`INFO >> ${message}`, ...formattedParams) : null;
+        env === 'dev' ? console.log(`INFO >> ${message}`, ...formattedParams) : void 0;
     },
 
     error: (message, ...params) => {
         const formattedParams = params.map((param) =>
             typeof param === 'object' ? JSON.stringify(param, null, 2) : param
         );
-        env === 'dev' ? console.error(`ERROR >> ${message}`, ...formattedParams) : null;
+        env === 'dev' ? console.error(`ERROR >> ${message}`, ...formattedParams) : void 0;
     },
 
     warning: (message, ...params) => {
         const formattedParams = params.map((param) =>
             typeof param === 'object' ? JSON.stringify(param, null, 2) : param
         );
-        env === 'dev' ? console.warn(`WARNING >> ${message}`, ...formattedParams) : null;
+        env === 'dev' ? console.warn(`WARNING >> ${message}`, ...formattedParams) : void 0;
     },
 };
 
