@@ -14,12 +14,11 @@ import {
 
 //const rs = await deleteDataById(12);
 
-//const id = 2;
+//const id = 15;
 //const data = { state: 'INCOMPLETE', description: 'edited value' };
 
 //editDataById(id, data);
 
-//const id = 2;
-//const data = { state: 'COMPLETE', completed_at: pg.fn.now() };
+//const id = 11;
 
-//updateDataTimestampById(id, data);
+//updateDataTimestampById(id);
