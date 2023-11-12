@@ -31,6 +31,7 @@ export const editDataById = async (id, data) => {
         logger.error('error updating row >', error);
         return false;
     } finally {
-        pg.destroy();
+        // caousing issues
+        //pg.destroy();
     }
 };

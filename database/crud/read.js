@@ -38,7 +38,8 @@ export const listAllData = async () => {
     } catch (error) {
         logger.error('error listing rows >', error);
     } finally {
-        pg.destroy();
+        // caousing issues
+        //pg.destroy();
     }
     return todos;
 };

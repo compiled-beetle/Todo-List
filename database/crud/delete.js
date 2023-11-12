@@ -22,7 +22,8 @@ export const deleteDataById = async (id) => {
         logger.error('error deleting row >', error);
         return false;
     } finally {
-        pg.destroy();
+        // caousing issues
+        //pg.destroy();
     }
     return true;
 };

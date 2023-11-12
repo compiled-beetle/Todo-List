@@ -19,6 +19,7 @@ export const insertData = async (data) => {
         logger.error('error inserting data >', error);
         return false;
     } finally {
-        pg.destroy();
+        // caousing issues
+        //pg.destroy();
     }
 };
