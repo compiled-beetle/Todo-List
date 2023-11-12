@@ -1,5 +1,20 @@
 import { listAllData } from '../../database/crud/_index.js';
 
+import joi from 'joi';
+import { responseSchema } from '../validation/todo.js';
+
+const getAllRequestSchema = joi
+    .object({
+        filter: joi.string().valid('INCOMPLETE', 'COMPLETE', 'ALL').default('ALL').optional(),
+        orderBy: joi
+            .string()
+            .allow('')
+            .valid('', 'id', 'state', 'description', 'created_at', 'completed_at')
+            .default('created_at')
+            .optional(),
+    })
+    .or('filter', 'orderBy');
+
 /**
  * Gets all todos from the database.
  *
@@ -8,30 +23,35 @@ import { listAllData } from '../../database/crud/_index.js';
  * @return {Promise<any>} - The response message or the http error code.
  */
 export const getAllRequest = async (request, http) => {
-    const filter = request.query.filter;
-    const orderBy = request.query.orderBy || 'created_at';
+    const { error, value } = getAllRequestSchema.validate(request.query);
+
+    if (error) {
+        return http.response('query is invalid').code(400);
+    }
 
     let result = await listAllData();
+    result = responseSchema.validate(result);
+    console.log(result);
 
     if (!result) {
         return http.response('data not found').code(404);
     }
 
-    if (filter) {
-        result = result.filter((item) => item.state === filter);
+    if (value.filter && value.filter !== 'ALL') {
+        result.value = result.value.filter((item) => item.state === value.filter);
     }
 
-    if (orderBy) {
-        result.sort((a, b) => {
-            if (a[orderBy] < b[orderBy]) {
+    if (value.orderBy) {
+        result.value.sort((a, b) => {
+            if (a[value.orderBy] < b[value.orderBy]) {
                 return -1;
             }
-            if (a[orderBy] > b[orderBy]) {
+            if (a[value.orderBy] > b[value.orderBy]) {
                 return 1;
             }
             return 0;
         });
     }
 
-    return http.response(JSON.stringify(result)).code(200);
+    return http.response(JSON.stringify(result.value)).code(200);
 };
