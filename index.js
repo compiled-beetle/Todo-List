@@ -1,11 +1,3 @@
-// database crud
-import {
-    insertData,
-    listAllData,
-    editDataById,
-    deleteDataById,
-} from './database/crud/_index.js';
-
 // api app server
 import { apiServer } from './api/server.js';
 
@@ -16,9 +8,3 @@ const startServer = async () => {
 };
 
 startServer();
-
-//const rs = await deleteDataById(12);
-
-//const id = 11;
-
-//updateDataTimestampById(id);
