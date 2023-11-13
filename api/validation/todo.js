@@ -6,6 +6,6 @@ export const responseSchema = joi.array().items(
         state: joi.string().valid('INCOMPLETE', 'COMPLETE').required(),
         description: joi.string().min(3).max(255).required(),
         created_at: joi.date().required(),
-        completed_at: joi.date().allow(null).required(),
+        completed_at: joi.date().allow(null).required()
     })
 );
