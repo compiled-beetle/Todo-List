@@ -1,5 +1,12 @@
 import { editDataById } from '../../database/crud/_index.js';
 
+import joi from 'joi';
+import { responseSchema } from '../validation/todo.js';
+
+const patchIdRequestSchema = joi.number().integer().required();
+const patchStateRequestSchema = joi.string().valid('INCOMPLETE', 'COMPLETE').default('INCOMPLETE').optional();
+const patchDescriptionRequestSchema = joi.string().min(3).max(255).optional();
+
 /**
  * Executes a PATCH on a todo and returns a response.
  *
@@ -8,22 +15,28 @@ import { editDataById } from '../../database/crud/_index.js';
  * @return {Promise<any>} - The response message or the http error code.
  */
 export const patchRequest = async (request, http) => {
-    const id = request.params.id;
     const body = request.payload;
+    const id = patchIdRequestSchema.validate(request.params.id);
+    const state = patchStateRequestSchema.validate(request.payload.state);
+    const description = patchDescriptionRequestSchema.validate(request.payload.description);
 
     if (!id) {
         return http.response('id is required').code(404);
     } else if (!body) {
-        if (!body.description || !body.state) {
+        if (!description || !state) {
             return http.response('description or state is required').code(404);
         }
-        if (body.state !== 'INCOMPLETE' || body.state !== 'COMPLETE') {
+        if (state.value !== 'INCOMPLETE' || state.value !== 'COMPLETE') {
             return http.response('state is invalid').code(404);
         }
         return http.response('body is required').code(404);
     }
 
-    const result = await editDataById(id, body);
+    let result = await editDataById(id.value, body);
+
+    if (!result) {
+        return http.response('data not found').code(404);
+    }
 
     if (!result) {
         return http.response('data not found').code(404);
@@ -31,5 +44,7 @@ export const patchRequest = async (request, http) => {
         return http.response('data is locked').code(400);
     }
 
-    return http.response(JSON.stringify(result)).code(200);
+    result = responseSchema.validate(result);
+
+    return http.response(JSON.stringify(result.value)).code(200);
 };
