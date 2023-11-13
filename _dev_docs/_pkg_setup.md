@@ -26,3 +26,12 @@ npx eslint file.js
 ```
 
 > missing hapi-swagger -> marked to be adde at later date -> [hapi-swagger](https://github.com/glennjones/hapi-swagger)
+
+## adding docs
+
+```bash
+npm install --save-dev hapi-swagger @hapi/inert @hapi/vision
+npx install-peerdeps hapi-swagger
+```
+
+> not working -> "Failed to fetch /swagger.json" error, I can't findout why.
